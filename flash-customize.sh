@@ -88,7 +88,9 @@ function temp_store() {
     | xargs -I {} wget -O aurora-store-latest.apk {}
 
   echo "Temporarily installing the Aurora Store on your phone..."
-  adb install aurora-store-latest.apk
+  if [ -f "aurora-store-latest.apk" ]; then
+    adb install "aurora-store-latest.apk"
+  fi
 
   echo "Update any third party apps you have installed or add any apps you need (e.g. maps, secure messaging, notes, minimalist launcher)"
   echo "Warning: Some apps like Venmo, bank apps, and certain Google apps will not work."
@@ -117,20 +119,6 @@ function disable_google_services() {
   fi
 }
 
-# disable built-in lineageOS camera - leave it installed on the phone as a backup
-# install Google's Pixel camera app, where path to apk is provided by user in config.sh
-function replace_camera() {
-  #TODO since the APK is user-provided, make it a "replace default camera" option more generally
-  if [[ "${GOOGLE_PIXEL_CAMERA,,}" == "true" ]]; then
-    if [[ -n "$PIXEL_CAMERA_APK" && "$PIXEL_CAMERA_APK" == *.apk ]]; then
-      adb shell pm disable-user --user 0 org.lineageos.aperture
-      adb install "$PIXEL_CAMERA_APK"
-    else
-      echo "The Pixel Camera APK was not found at path specified in config.sh"
-    fi
-  fi
-}
-
 main() {
   if [ ! -f "$script_in_here/config.sh" ]; then
     echo "No config.sh file found"
@@ -153,7 +141,6 @@ main() {
   ui_changes
   temp_store
   disable_google_services
-  replace_camera
 
   echo "Phone is dumber now!"
 }
