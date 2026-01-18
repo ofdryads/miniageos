@@ -1,7 +1,7 @@
-
+#!/bin/bash
 
 function get_fdroid() {
-    curl -s 'https://f-droid.org/en/packages/org.fdroid.fdroid/' \
+curl -s 'https://f-droid.org/en/packages/org.fdroid.fdroid/' \
     | grep -o 'https://f-droid.org/repo/org.fdroid.fdroid[^"]*\.apk' \
     | head -n 1 \
     | xargs -r -I {} wget -O fdroid-latest.apk '{}'
@@ -23,8 +23,11 @@ function pull_up_qr() {
     fi
 }
 
-
-function remove_fdroid() {
-    adb uninstall #package
-
+function main() {
+    get_fdroid
+    pull_up_qr
 }
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  main "$@"
+fi
