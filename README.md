@@ -114,7 +114,6 @@ chmod +x sync-mod-build.sh flash-customize.sh
 
 ### One-time changes:
 
-- Camera app replacement (if no new release you want to install)
 - Editing proprietary-files.txt
 - Grayscale/night mode/animations/UI magnifier
 
@@ -124,10 +123,10 @@ chmod +x sync-mod-build.sh flash-customize.sh
 
 - Banking apps, Venmo, NFC/contactless pay (like Google Pay, Apple Pay, or Samsung Pay)
 - RCS messaging
-  - However, regular SMS, most messaging apps (Signal, WhatApp), and iMessage-via-Mac services (BlueBubbles) _will_ work just fine
+  - However, regular SMS, most messaging apps (Signal, WhatApp), and iMessage proxy services (OpenBubbles/BlueBubbles) _will_ work just fine
 - _(The points above apply to any phone with an unlocked bootloader, including ones running official LineageOS builds)_
 - Opening links (URL or QR code) in a browser will not work, since there is no browser to open the links.
-- If using a third party messaging app, I _highly_ recommend installing MicroG to be able to get push notifications. You can get the literal messages without it but not the notifications.
+- If using a third party messaging app, I _highly_ recommend installing MicroG to be able to get push notifications. You can get the literal messages without it, but not the notifications.
 
 ## Important note
 
